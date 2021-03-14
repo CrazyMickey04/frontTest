@@ -1,18 +1,21 @@
-import Componet from "./compoent"
-import domUtils from "./domUtils"
+import Componet from "./compoent.js"
+import domUtils from "./domUtils.js"
+import { initUser } from "./utils.js"
 class WeChat {
  data = []
  constructor(domStr) {
   this.dom = domUtils.query(domStr);
+  this.initalization();
  }
  initalization = () => {
   this.generateData();
   this.data.forEach(item => {
-   Componet(this.dom, item)
+   new Componet(this.dom, item)
   })
  }
  // 生成1000好友 
  generateData = () => {
-  this.data = []
+  this.data = initUser(100)
  }
 }
+export default  new WeChat('container')

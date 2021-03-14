@@ -1,29 +1,39 @@
-import domUtils from "./domUtils"
-class Component {
+import domUtils from "./domUtils.js"
+export default class Component {
  constructor(container, wechatInfo) {
   this.title = wechatInfo.title;
-  this.list = wechatInfo.list;
+  this.list = wechatInfo.users;
   this.offsetTop = false;
   this.offsetEnd = false;
+  this.container = container;
+  this.init();
  }
  // 初始化 
  init = () => {
-
+  this.createChatList();
  }
  // 生成列表 
  createChatList = () => {
-  let template = `<ul class="chat_list ${this.title}"></ul>`;
-  let dom = domUtils.parentDom(template);
-  let domChild = this.createChat(dom);
+  let chats = this.createChat(this.list);
+  let template = 
+  `<ul class="chat_list ${this.title}">
+    <li class="title">
+     ${this.title}
+    </li>
+    ${chats}
+  </ul>`;
+  let dom = domUtils.createDom(template, `.${this.title}`);
+  this.container.appendChild(dom)
+
  }
  // 生成 每一列 
  createChat = (parentDom) => {
-  let doms = []
-  this.list.forEach(item=>{
-   let child= this.tempalteTransf(item);
-   doms.push(child);
+  let doms = ''
+  this.list.forEach(item => {
+   let child = this.tempalteTransf(item);
+   doms += child;
   })
-  domUtils.appendChild(parentDom,doms);
+  return doms;
  }
 
  // 绑定scroll事件
@@ -45,6 +55,6 @@ class Component {
     </div>
   </li>
   `
-  return template;
+  return template
  }
 }
