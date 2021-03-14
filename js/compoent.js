@@ -13,6 +13,7 @@ export default class Component {
     this.titles = domUtils.quertClass('title')
     this.currentTitle = ''
   }
+
   // 初始化 
   init = () => {
     this.createChatList(); // 联系人列表
@@ -57,25 +58,26 @@ export default class Component {
   // rightBar list
   createBar = () => {
     let template =
-      `<li>
+      `<li class="bar_item">
         ${this.title}
         </li>`;
     let dom = domUtils.createDom(template, `.bar_item`);
-    // domUtils.query('bar_wrap').appendChild(dom)
+    domUtils.query('bar_wrap').appendChild(dom)
   }
+  
   // 绑定scroll事件
   bindScrollEvent = () => {
-    console.log(observer.messageMap)
+    console.log('接受到了',this.title)
     observer.addListener('scorll', (e) => {
       // console.log(e)
       this.currentTitle = this.watchTitle(this.titles)
       console.log('currentTitle', this.currentTitle)
+      if(this.title===this.currentTitle){
+        console.log(this.title,true )
+      }else{
+        console.log(this.title,false )
+      }
     })
-  }
-
-  //  scroll触发事件
-  trigger = () => {
-
   }
   // 监听fixed title
   watchTitle = (ele) => {

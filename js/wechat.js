@@ -10,14 +10,15 @@ class WeChat {
   this.tabToggle(this.tab, 'tab_item', 'tab_item active');
   this.initalization();
   window.addEventListener('scroll',
-   throttling(this.publish, 100, 100));
+   throttling(this.publish, 1000, 100));
  }
  publish = (e) => {
+   console.log('触发了' )
   observer.publish('scorll', e)
  }
  initalization = () => {
    // 初始化好友数量
-  this.generateData(100);
+  this.generateData(10);
   this.data.forEach(item => {
    new Componet(this.dom, item)
   })
