@@ -1,10 +1,8 @@
 class docUtils {
  // 创建DOM
- static createDom(parnet,templateStr) {
-   let parser = new DOMParser();
+ static createDom(templateStr) {
    let doc = parser.parseFromString(templateStr, "text/html");
-   let dom = doc.querySelector(parnet);
-   return dom;
+   return doc;
  }
  
  // 获取子元素中最后一个DOM
