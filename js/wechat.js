@@ -1,31 +1,14 @@
-class WechatComponent {
- constructor(container, wechatInfo) {
-  super(container)
-  this.title = wechatInfo.title;
-  this.list = wechatInfo.list;
-  this.offsetTop = false;
-  this.offsetEnd = false;
+import Componet from "./compoent"
+class WeChat {
+ data = []
+ initalization = () => {
+  this.generateData();
+  this.data.forEach(item => {
+   Componet(item)
+  })
  }
- // 初始化 
- init = () => {
-
- }
- // 生成列表 
- createChatList = () => {
-
- }
- // 生成 每一列 
- createChat = () => {
-
- }
-
- // 绑定scroll事件
- bindScrollEvent = () => {
-
- }
-
- //  scroll触发事件
- trigger = () => {
-
+ // 生成1000好友 
+ generateData = () => {
+  return []
  }
 }
