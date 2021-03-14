@@ -129,10 +129,10 @@ footer {
     text-align: center;
 }
 .right_bar li {
-    width: 20px;
-    height: 20px;
+    width: 15px;
+    height: 15px;
     text-align: center;
-    line-height: 20px;
+    line-height: 15px;
 }
 .right_bar li.active {
     border-radius: 50%;
