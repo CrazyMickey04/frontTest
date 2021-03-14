@@ -61,3 +61,19 @@ export function sortUser(arr) {
  console.log(newArr.sort(propComparator('title')));
  return newArr
 }
+
+export function throttling(fn, wait, maxTimelong) {
+ var timeout = null,
+  startTime = Date.parse(new Date);
+
+ return function (e) {
+  if (timeout !== null) clearTimeout(timeout);
+  var curTime = Date.parse(new Date);
+  if (curTime - startTime >= maxTimelong) {
+   fn(e);
+   startTime = curTime;
+  } else {
+   timeout = setTimeout(fn, wait);
+  }
+ }
+}
