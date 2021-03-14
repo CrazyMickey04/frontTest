@@ -16,7 +16,7 @@ $(function(){
       for (let j = 0; j < usersData.length; j++) {
         $(".user_list").append(`
           <li>
-              <div class="img" style="background: url('..、/images/${usersData[j].img}.jpg')"></div>
+              <div class="img" style="background: url('./images/${usersData[j].img}.jpeg');background-size: cover;"></div>
               <div>
                   <span>${usersData[j].name}</span>
               </div>
@@ -65,6 +65,8 @@ function sortUser(arr) {
         ]
       });
       titelArr.push(arr[i].title);
+      
+      
     } else {
       for (var j = 0; j < newArr.length; j++) {
         if (newArr[j].title == arr[i].title) {
@@ -79,7 +81,10 @@ function sortUser(arr) {
       }
     }
   }
+  console.log('----- 右侧bar 字母 ----- ')
+  console.log(titelArr)
 
+  
   console.log("------好友数据分类-----")
   console.log(newArr)
 
