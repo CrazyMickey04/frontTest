@@ -11,14 +11,12 @@ $(function(){
     var Users = initUser(100);
     var initData = sortUser(Users);
     for(let i = 0; i < initData.length; i++ ) {
-      $(".chat_list").append(`<li class="title">${initData[i].title}</li>`)
+      $(".user_list").append(`<li class="title">${initData[i].title}</li>`)
       let usersData = initData[i].users
       for (let j = 0; j < usersData.length; j++) {
-        $(".chat_list").append(`
+        $(".user_list").append(`
           <li>
-              <div class="img">
-                <img src="../images/${usersData[j].img}.jpeg"
-              </div>
+              <div class="img" style="background: url('..、/images/${usersData[j].img}.jpg')"></div>
               <div>
                   <span>${usersData[j].name}</span>
               </div>

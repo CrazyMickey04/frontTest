@@ -86,6 +86,12 @@ a,input,img,textarea,span,div{outline: 0;-webkit-tap-highlight-color:rgba(255,0,
 .chat_list li:last-child div:last-child {
     box-shadow: none;
 }
+.chat_list li.title {
+    position: sticky;
+    top: 50px;
+    left: 0px;
+    right: 0px;
+}
 /* footer */
 footer {
     position: fixed;
