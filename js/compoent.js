@@ -9,6 +9,9 @@ export default class Component {
     this.offsetEnd = false;
     this.container = container;
     this.init();
+    // 获取每个 .title元素
+    this.titles = domUtils.quertClass('title')
+    this.currentTitle = ''
   }
   // 初始化 
   init = () => {
@@ -55,13 +58,24 @@ export default class Component {
   bindScrollEvent = () => {
     console.log(observer.messageMap)
     observer.addListener('scorll', (e) => {
-      console.log(e)
+      // console.log(e)
+      this.currentTitle = this.watchTitle(this.titles)
+      console.log('currentTitle', this.currentTitle)
     })
   }
 
   //  scroll触发事件
   trigger = () => {
 
+  }
+  // 监听fixed title
+  watchTitle = (ele) => {
+    for(let i = 0; i < ele.length; i++) {
+      let offTop = ele[i].getBoundingClientRect().top
+      if (offTop >= 50 && offTop <= 90) {
+        return ele[i].innerText
+      }
+    }
   }
   
 }

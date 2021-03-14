@@ -37,6 +37,5 @@ class WeChat {
     }
   }
  }
- 
 }
 export default new WeChat('container')
