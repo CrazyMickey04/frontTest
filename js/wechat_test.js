@@ -7,8 +7,25 @@ $(function(){
       $('.right_bar li').removeClass("active")
       $(this).addClass("active")
     })
-    // get User
-    var Users = initUser(20);
+    // get User 初始化数据
+    var Users = initUser(100);
+    var initData = sortUser(Users);
+    for(let i = 0; i < initData.length; i++ ) {
+      $(".chat_list").append(`<li class="title">${initData[i].title}</li>`)
+      let usersData = initData[i].users
+      for (let j = 0; j < usersData.length; j++) {
+        $(".chat_list").append(`
+          <li>
+              <div class="img">
+                <img src="../images/${usersData[j].img}.jpeg"
+              </div>
+              <div>
+                  <span>${usersData[j].name}</span>
+              </div>
+          </li>
+        `)
+      }
+    }
 })
 
 
@@ -21,7 +38,7 @@ function initUser(count) {
     var randAZ =  Math.ceil(Math.random() * 25);
     // A-Z ASCII：65-90
     var firstName = String.fromCharCode(65 + randAZ) 
-    var lastName = Math.ceil(Math.random(0,100))
+    var lastName = Math.floor(Math.random() * 100);
 
     user.title = firstName
     user.name = firstName + lastName;
@@ -29,7 +46,49 @@ function initUser(count) {
     
     userList.push(user)
   }
+  console.log(`------随机生成 ${count} 个好友-----`)
   console.log(userList)
   return userList
 }
 
+// 数组重新封装 按字母分类
+function sortUser(arr) {
+  var titelArr = [];
+  var newArr = [];
+  for (var i = 0; i < arr.length; i++) {
+    if (titelArr.indexOf(arr[i].title) === -1) {
+      newArr.push({
+        title: arr[i].title,
+        users: [
+          {
+            name: arr[i].name, 
+            img: arr[i].img
+          }
+        ]
+      });
+      titelArr.push(arr[i].title);
+    } else {
+      for (var j = 0; j < newArr.length; j++) {
+        if (newArr[j].title == arr[i].title) {
+          newArr[j].users.push(
+            {
+              name: arr[i].name, 
+              img: arr[i].img
+            }
+          );
+          break;
+        }
+      }
+    }
+  }
+
+  console.log("------好友数据分类-----")
+  console.log(newArr)
+
+  var propComparator = (propName) =>
+  (a, b) => a[propName].toLowerCase() == b[propName].toLowerCase() ? 0 : a[propName].toLowerCase() < b[propName].toLowerCase() ? -1 : 1
+  
+  console.log('-------按字母排序----')
+  console.log(newArr.sort(propComparator('title'))); 
+  return newArr
+}
