@@ -7,7 +7,7 @@ class WeChat {
  constructor(domStr) {
   this.dom = domUtils.query(domStr);
   this.tab = domUtils.quertClass('tab_item')
-  this.tabToggle(this.tab);
+  this.tabToggle(this.tab, 'tab_item', 'tab_item active');
   this.initalization();
   window.addEventListener('scroll',
    throttling(this.publish, 100, 100));
@@ -27,13 +27,13 @@ class WeChat {
   this.data = initUser(count)
  }
  // 切换footer tab
- tabToggle = (ele) => {
+ tabToggle = (ele, defaultClass, activeClass) => {
   for(var i = 0; i < ele.length; i++) {
     ele[i].onclick = function () {
-      for(var i=0;i<ele.length;i++){
-        ele[i].className='tab_item';
+      for(var i = 0; i < ele.length; i++){
+        ele[i].className = defaultClass;
       }
-      this.className='tab_item active';
+      this.className = activeClass;
     }
   }
  }

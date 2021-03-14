@@ -15,7 +15,8 @@ export default class Component {
   }
   // 初始化 
   init = () => {
-    this.createChatList();
+    this.createChatList(); // 联系人列表
+    this.createBar(); // 右侧bar
     this.bindScrollEvent();
   }
   // 生成ul列表
@@ -30,7 +31,6 @@ export default class Component {
       </ul>`;
     let dom = domUtils.createDom(template, `.${this.title}`);
     this.container.appendChild(dom)
-
   }
   // 遍历list 生成users li
   createChat = (parentDom) => {
@@ -53,6 +53,15 @@ export default class Component {
       </li>
       `
     return template
+  }
+  // rightBar list
+  createBar = () => {
+    let template =
+      `<li>
+        ${this.title}
+        </li>`;
+    let dom = domUtils.createDom(template, `.bar_item`);
+    // domUtils.query('bar_wrap').appendChild(dom)
   }
   // 绑定scroll事件
   bindScrollEvent = () => {
