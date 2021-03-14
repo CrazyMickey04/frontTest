@@ -1,11 +1,17 @@
 import Componet from "./compoent.js"
 import domUtils from "./domUtils.js"
-import { initUser } from "./utils.js"
+import { initUser, throttling } from "./utils.js"
+import observer from "./observer.js"
 class WeChat {
  data = []
  constructor(domStr) {
   this.dom = domUtils.query(domStr);
   this.initalization();
+  window.addEventListener('scroll',
+   throttling(this.publish, 100, 100));
+ }
+ publish = (e) => {
+  observer.publish('scorll', e)
  }
  initalization = () => {
   this.generateData();
@@ -18,4 +24,4 @@ class WeChat {
   this.data = initUser(100)
  }
 }
-export default  new WeChat('container')
+export default new WeChat('container')
