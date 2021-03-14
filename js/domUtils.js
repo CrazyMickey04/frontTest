@@ -16,7 +16,9 @@ class docUtils {
  static query(id) {
    return document.getElementById(id) || false;
  }
-
+ static quertClass(e){
+    return document.getElementsByClassName(e) || false;
+  }
  // 删除DOM
  static delete(domStr,template) {
    if (!template) return;

@@ -29,13 +29,12 @@ $(function(){
 
 // 随机生成好友名字
 function initUser(count) {
-  // var firstName  = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
   var userList = [];
   for(var i = 0; i < count; i++) {
     var user = {}
     var randAZ =  Math.ceil(Math.random() * 25);
     // A-Z ASCII：65-90
-    var firstName = String.fromCharCode(65 + randAZ) 
+    var firstName = String.fromCharCode(64 + randAZ) 
     var lastName = Math.floor(Math.random() * 100);
 
     user.title = firstName

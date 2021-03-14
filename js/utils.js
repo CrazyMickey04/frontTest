@@ -6,7 +6,7 @@ export function initUser(count) {
   var user = {}
   var randAZ = Math.ceil(Math.random() * 25);
   // A-Z ASCII：65-90
-  var firstName = String.fromCharCode(65 + randAZ)
+  var firstName = String.fromCharCode(64 + randAZ)
   var lastName = Math.floor(Math.random() * 100);
 
   user.title = firstName
@@ -21,46 +21,51 @@ export function initUser(count) {
 }
 
 // 数组重新封装 按字母分类
-export function sortUser(arr) {
- var titelArr = [];
- var newArr = [];
- for (var i = 0; i < arr.length; i++) {
-  if (titelArr.indexOf(arr[i].title) === -1) {
-   newArr.push({
-    title: arr[i].title,
-    users: [
-     {
-      name: arr[i].name,
-      img: arr[i].img
-     }
-    ]
-   });
-   titelArr.push(arr[i].title);
-  } else {
-   for (var j = 0; j < newArr.length; j++) {
-    if (newArr[j].title == arr[i].title) {
-     newArr[j].users.push(
-      {
-       name: arr[i].name,
-       img: arr[i].img
+function sortUser(arr) {
+    var titelArr = [];
+    var newArr = [];
+    for (var i = 0; i < arr.length; i++) {
+      if (titelArr.indexOf(arr[i].title) === -1) {
+        newArr.push({
+          title: arr[i].title,
+          users: [
+            {
+              name: arr[i].name, 
+              img: arr[i].img
+            }
+          ]
+        });
+        titelArr.push(arr[i].title);
+        
+        
+      } else {
+        for (var j = 0; j < newArr.length; j++) {
+          if (newArr[j].title == arr[i].title) {
+            newArr[j].users.push(
+              {
+                name: arr[i].name, 
+                img: arr[i].img
+              }
+            );
+            break;
+          }
+        }
       }
-     );
-     break;
     }
-   }
+    console.log('----- 右侧bar 字母 ----- ')
+    console.log(titelArr)
+  
+    
+    console.log("------好友数据分类-----")
+    console.log(newArr)
+  
+    var propComparator = (propName) =>
+    (a, b) => a[propName].toLowerCase() == b[propName].toLowerCase() ? 0 : a[propName].toLowerCase() < b[propName].toLowerCase() ? -1 : 1
+    
+    console.log('-------按字母排序----')
+    console.log(newArr.sort(propComparator('title'))); 
+    return newArr
   }
- }
-
- console.log("------好友数据分类-----")
- console.log(newArr)
-
- var propComparator = (propName) =>
-  (a, b) => a[propName].toLowerCase() == b[propName].toLowerCase() ? 0 : a[propName].toLowerCase() < b[propName].toLowerCase() ? -1 : 1
-
- console.log('-------按字母排序----')
- console.log(newArr.sort(propComparator('title')));
- return newArr
-}
 
 export function throttling(fn, wait, maxTimelong) {
  var timeout = null,
