@@ -9,7 +9,6 @@ $(function(){
     })
     // get User
     var Users = initUser(20);
-   
 })
 
 
