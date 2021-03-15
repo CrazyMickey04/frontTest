@@ -8,13 +8,13 @@ export default class Component {
     this.offsetTop = false;
     this.offsetEnd = false;
     this.container = container;
-     //存当前dom 对象
+    //存当前dom 对象
     this.currentTitleDom = ''
     this.init();
     // 获取每个 .title元素
     this.titles = domUtils.quertClass('title')
     this.currentTitle = ''
-   
+
   }
 
   // 初始化 
@@ -69,21 +69,17 @@ export default class Component {
     domUtils.query('bar_wrap').appendChild(dom)
     this.scrollTitle(dom)
   }
-  
+
   // 绑定scroll事件
   bindScrollEvent = () => {
-    console.log('接受到了',this.title)
     observer.addListener('scorll', (e) => {
-      //优化 watchTitleDom 替换 watchtitle 
-      this.watchTitleDom(this.currentTitleDom);
-      // this.watchTitle(this.titles)
-      console.log('currentTitle', this.currentTitle)
-      if(this.title===this.currentTitle){
-        this.activeBar('bar_item','bar_item active')
-        console.log(this.title,true )
-      }else{
-        console.log(this.title,false )
+      const flag = this.watchTitleDom(this.currentTitleDom);
+      if (flag) {
+        this.activeBar('bar_item', 'bar_item active')
       }
+      // if (this.title === this.currentTitle) {
+      //   this.activeBar('bar_item', 'bar_item active')
+      // }
     })
   }
   watchTitleDom = (titleEle) => {
@@ -93,20 +89,21 @@ export default class Component {
     titleEle.className = 'title'
     if (offTop >= topHeight && offTop <= (topHeight + selfHeght)) {
       titleEle.className = 'title active'
-      this.currentTitle  = titleEle.innerText
-      console.log('------currentTitle----', titleEle.innerText)
+      this.currentTitle = titleEle.innerText
+      return true;
     }
+    return false;
   }
   // 监听fixed title
   watchTitle = (ele) => {
-    for(let i = 0; i < ele.length; i++) {
+    for (let i = 0; i < ele.length; i++) {
       let offTop = ele[i].getBoundingClientRect().top
       let topHeight = domUtils.query('headCon').offsetHeight
       let selfHeght = ele[i].offsetHeight
       ele[i].className = 'title'
       if (offTop >= topHeight && offTop <= (topHeight + selfHeght)) {
         ele[i].className = 'title active'
-        this.currentTitle  = ele[i].innerText
+        this.currentTitle = ele[i].innerText
       }
     }
   }
@@ -116,18 +113,18 @@ export default class Component {
     Array.from(barDom).forEach(item => {
       item.className = defaultClass
       if (item.innerText == this.currentTitle) {
+        console.log(item.innerText == this.currentTitle, defaultClass, this.currentTitle)
         item.className = activeClass
       }
     })
   }
- //scrollTitle bar联动
+  //scrollTitle bar联动
   scrollTitle = (ele) => {
-    ele.onclick = (e) => {  
-      console.log('barClick', e.target.innerText)
+    ele.onclick = (e) => {
       let clickText = e.target.innerText;
       this.watchTitleDom(this.currentTitleDom);
       Array.from(domUtils.quertClass('title')).forEach(item => {
-        if(item.innerText == clickText) {
+        if (item.innerText == clickText) {
           window.scrollTo({
             top: item.offsetTop - item.offsetHeight,
             behavior: "smooth"
