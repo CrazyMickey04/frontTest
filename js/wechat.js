@@ -5,12 +5,14 @@ import observer from "./observer.js"
 class WeChat {
  data = []
  constructor(domStr) {
+  
   this.dom = domUtils.query(domStr);
   this.tab = domUtils.quertClass('tab_item')
   this.tabToggle(this.tab, 'tab_item', 'tab_item active');
   this.initalization();
   window.addEventListener('scroll',
-   throttling(this.publish, 100, 100));
+   throttling(this.publish, 10, 10));
+  window.document.documentElement.scrollTop = 0;
  }
  publish = (e) => {
    console.log('触发了' )
