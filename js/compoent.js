@@ -73,6 +73,7 @@ export default class Component {
       this.currentTitle = this.watchTitle(this.titles)
       console.log('currentTitle', this.currentTitle)
       if(this.title===this.currentTitle){
+        this.activeBar('bar_item','bar_item active')
         console.log(this.title,true )
       }else{
         console.log(this.title,false )
@@ -83,10 +84,33 @@ export default class Component {
   watchTitle = (ele) => {
     for(let i = 0; i < ele.length; i++) {
       let offTop = ele[i].getBoundingClientRect().top
-      if (offTop >= 50 && offTop <= 90) {
+      let topHeight = domUtils.query('headCon').offsetHeight
+      let selfHeght = ele[i].offsetHeight
+      ele[i].className = 'title'
+      if (offTop >= topHeight && offTop <= (topHeight + selfHeght)) {
+        ele[i].className = 'title active'
         return ele[i].innerText
       }
     }
+    // Array.from(ele).forEach((item) => {
+    //   let offTop =  item.getBoundingClientRect().top
+    //   let topHeight = domUtils.query('headCon').offsetHeight
+    //   let selfHeght = item.offsetHeight
+    //   item.className = 'title'
+    //   if (offTop >= topHeight && offTop <= (topHeight + selfHeght)) {
+    //     item.className = 'title active'
+    //     return item.innerText
+    //   }
+    // })
   }
-  
+  // right bar
+  activeBar(defaultClass, activeClass) {
+    let barDom = domUtils.quertClass(defaultClass);
+    Array.from(barDom).forEach(item => {
+      item.className = defaultClass
+      if (item.innerText == this.currentTitle) {
+        item.className = activeClass
+      }
+    })
+  }
 }
