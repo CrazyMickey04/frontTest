@@ -18,7 +18,7 @@ class WeChat {
  }
  initalization = () => {
    // 初始化好友数量 
-  this.generateData(20);
+  this.generateData(50);
 
   this.data.forEach(item => {
    new Componet(this.dom, item)

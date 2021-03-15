@@ -47,7 +47,7 @@ export default class Component {
     let template =
       `
       <li> 
-        <div class="img" style="background:url(./images/${chat.img}.jpeg);background-size: cover"></div>
+        <div class="img" style="background:url(./images/${chat.img}.jpg);background-size: cover"></div>
         <div>
             <span>${chat.name}</span>
         </div>
@@ -71,7 +71,7 @@ export default class Component {
     console.log('接受到了',this.title)
     observer.addListener('scorll', (e) => {
       // console.log(e)
-      this.currentTitle = this.watchTitle(this.titles)
+      this.watchTitle(this.titles)
       console.log('currentTitle', this.currentTitle)
       if(this.title===this.currentTitle){
         this.activeBar('bar_item','bar_item active')
@@ -90,7 +90,7 @@ export default class Component {
       ele[i].className = 'title'
       if (offTop >= topHeight && offTop <= (topHeight + selfHeght)) {
         ele[i].className = 'title active'
-        return ele[i].innerText
+        this.currentTitle  = ele[i].innerText
       }
     }
     // Array.from(ele).forEach((item) => {

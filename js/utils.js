@@ -24,37 +24,30 @@ export function initUser(count) {
 function sortUser(arr) {
     var titelArr = [];
     var newArr = [];
-    for (var i = 0; i < arr.length; i++) {
-      if (titelArr.indexOf(arr[i].title) === -1) {
-        newArr.push({
-          title: arr[i].title,
-          users: [
-            {
-              name: arr[i].name, 
-              img: arr[i].img
-            }
-          ]
-        });
-        titelArr.push(arr[i].title);
-        
-        
-      } else {
-        for (var j = 0; j < newArr.length; j++) {
-          if (newArr[j].title == arr[i].title) {
-            newArr[j].users.push(
-              {
-                name: arr[i].name, 
-                img: arr[i].img
-              }
-            );
-            break;
-          }
+    arr.forEach((item) => {
+        if (titelArr.indexOf(item.title) === -1) {
+            newArr.push({
+                title: item.title,
+                users: [
+                    {
+                        name: item.name,
+                        img: item.img
+                    }
+                ]
+            })
+            titelArr.push(item.title);
+        } else {
+            newArr.forEach((newItem) => {
+                if (newItem.title == item.title) {
+                    newItem.users.push({
+                        name: item.name,
+                        img: item.img
+                    });
+                    return;
+                }
+            })
         }
-      }
-    }
-    console.log('----- 右侧bar 字母 ----- ')
-    console.log(titelArr)
-  
+    })
     
     console.log("------好友数据分类-----")
     console.log(newArr)
