@@ -63,6 +63,7 @@ export default class Component {
         </li>`;
     let dom = domUtils.createDom(template, `.bar_item`);
     domUtils.query('bar_wrap').appendChild(dom)
+    this.scrollTitle(dom)
   }
   
   // 绑定scroll事件
@@ -112,5 +113,20 @@ export default class Component {
         item.className = activeClass
       }
     })
+  }
+ //scrollTitle bar联动
+  scrollTitle = (ele) => {
+    ele.onclick = (e) => {
+      console.log('barClick', e.target.innerText)
+      let clickText = e.target.innerText;
+      Array.from(domUtils.quertClass('title')).forEach(item => {
+        if(item.innerText == clickText) {
+          window.scrollTo({
+            top: item.offsetTop - item.offsetHeight,
+            behavior: "smooth"
+          });
+        }
+      })
+    }
   }
 }
