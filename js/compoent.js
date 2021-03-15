@@ -14,7 +14,6 @@ export default class Component {
     // 获取每个 .title元素
     this.titles = domUtils.quertClass('title')
     this.currentTitle = ''
-
   }
 
   // 初始化 
@@ -77,9 +76,6 @@ export default class Component {
       if (flag) {
         this.activeBar('bar_item', 'bar_item active')
       }
-      // if (this.title === this.currentTitle) {
-      //   this.activeBar('bar_item', 'bar_item active')
-      // }
     })
   }
   watchTitleDom = (titleEle) => {
@@ -113,7 +109,6 @@ export default class Component {
     Array.from(barDom).forEach(item => {
       item.className = defaultClass
       if (item.innerText == this.currentTitle) {
-        console.log(item.innerText == this.currentTitle, defaultClass, this.currentTitle)
         item.className = activeClass
       }
     })
@@ -122,7 +117,6 @@ export default class Component {
   scrollTitle = (ele) => {
     ele.onclick = (e) => {
       let clickText = e.target.innerText;
-      this.watchTitleDom(this.currentTitleDom);
       Array.from(domUtils.quertClass('title')).forEach(item => {
         if (item.innerText == clickText) {
           window.scrollTo({

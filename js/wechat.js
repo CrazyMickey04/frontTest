@@ -8,27 +8,26 @@ class WeChat {
     this.dom = domUtils.query(domStr);
     this.tab = domUtils.quertClass('tab_item')
     this.tabToggle(this.tab, 'tab_item', 'tab_item active');
-    this.initalization();
+    this.init();
     window.addEventListener('scroll',
-      throttling(this.publish, 16, 16));
+      throttling(this.publish, 20, 30));
     setTimeout(() => {
       window.document.documentElement.scrollTop = 0;
     }, 100);
   }
   publish = (e) => {
-    console.log('触发了')
     observer.publish('scorll', e)
   }
-  initalization = () => {
+  init = () => {
     // 初始化好友数量 
-    this.generateData(50);
+    this.creatUser(50);
 
     this.data.forEach(item => {
       new Componet(this.dom, item)
     })
   }
   // 生成1000好友 
-  generateData = (count) => {
+  creatUser = (count) => {
     this.data = initUser(count)
   }
   // 切换footer tab

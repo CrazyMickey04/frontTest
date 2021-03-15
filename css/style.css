@@ -105,10 +105,9 @@ footer {
     z-index: 99;
 }
 .fill_bottom {
-    height: 100px;
+    height: 70px;
 }
 .footer_tab {
-    height: 100px;
     display: flex;
     justify-content: space-around;
     background: rgba(237,237,237,0.99);

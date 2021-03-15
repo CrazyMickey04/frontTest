@@ -1,13 +1,13 @@
 // 随机生成好友名字
 export function initUser(count) {
- // var firstName  = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
- var userList = [];
- for (var i = 0; i < count; i++) {
-  var user = {}
-  var randAZ = Math.ceil(Math.random() * 25);
+ // let firstName  = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
+ let userList = [];
+ for (let i = 0; i < count; i++) {
+  let user = {}
+  let randAZ = Math.ceil(Math.random() * 25);
   // A-Z ASCII：65-90
-  var firstName = String.fromCharCode(64 + randAZ)
-  var lastName = Math.floor(Math.random() * 100);
+  let firstName = String.fromCharCode(64 + randAZ)
+  let lastName = Math.floor(Math.random() * 100);
 
   user.title = firstName
   user.name = firstName + lastName;
@@ -22,8 +22,8 @@ export function initUser(count) {
 
 // 数组重新封装 按字母分类
 function sortUser(arr) {
-    var titelArr = [];
-    var newArr = [];
+    let titelArr = [];
+    let newArr = [];
     arr.forEach((item) => {
         if (titelArr.indexOf(item.title) === -1) {
             newArr.push({
@@ -51,22 +51,21 @@ function sortUser(arr) {
     
     console.log("------好友数据分类-----")
     console.log(newArr)
-  
-    var propComparator = (propName) =>
+    // 按字母排序
+    let propComparator = (propName) =>
     (a, b) => a[propName].toLowerCase() == b[propName].toLowerCase() ? 0 : a[propName].toLowerCase() < b[propName].toLowerCase() ? -1 : 1
     
-    console.log('-------按字母排序----')
-    console.log(newArr.sort(propComparator('title'))); 
+    newArr.sort(propComparator('title'))
     return newArr
   }
 
 export function throttling(fn, wait, maxTimelong) {
- var timeout = null,
+ let timeout = null,
   startTime = Date.parse(new Date);
 
  return function (e) {
   if (timeout !== null) clearTimeout(timeout);
-  var curTime = Date.parse(new Date);
+  let curTime = Date.parse(new Date);
   if (curTime - startTime >= maxTimelong) {
    fn(e);
    startTime = curTime;
